@@ -59,7 +59,7 @@ class SignupVC: UIViewController {
         let passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$"
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         guard let password = signPasswordTxtField.text?.trimmed, !password.isEmpty, passwordPredicate.evaluate(with: password) else {
-            showALert(title: "Sorry", message: "Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, and one number.")
+            showALert(title: "Sorry", message: "Password must be at least 6 characters long, with at least one uppercase letter, one lowercase letter, and one number.")
             return false
         }
         guard let password = signPasswordTxtField.text?.trimmed, let passwordconfirm=ConfirmPasswordTxtField.text?.trimmed,  !password.isEmpty, !passwordconfirm.isEmpty, password==passwordconfirm  else {

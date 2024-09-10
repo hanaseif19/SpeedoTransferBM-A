@@ -3,7 +3,7 @@
 //
 
 import Foundation
-//hi 
+
 protocol SignInPresenterDelegate: AnyObject {
     func didLoginSuccessfully()
     func didLoginWithFailure(error: Error)
