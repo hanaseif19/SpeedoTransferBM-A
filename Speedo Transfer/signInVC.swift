@@ -6,23 +6,22 @@ import UIKit
 import LocalAuthentication
 
 class SignInViewController: UIViewController {
-
+    
     var context = LAContext()
     
     @IBOutlet weak var signInEmailTxtField: CustomTextField!
     @IBOutlet weak var signInPasswordTxtField: CustomTextField!
     
-//    private var presenter = SignInPresenter(apiClient: URLSessionApiClient())
-
+    //    private var presenter = SignInPresenter(apiClient: URLSessionApiClient())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAuthenticationContext()
+        
         configureTextFields()
         self.navigationItem.hidesBackButton = true
         title = "Sign In"
-            UserDefaults.standard.setValue(false, forKey: "isLoggedIn")
-
-   //     presenter.delegate = self
+        UserDefaults.standard.setValue(false, forKey: "isLoggedIn")
+        
     }
     
     private func configureTextFields() {
@@ -39,71 +38,19 @@ class SignInViewController: UIViewController {
     
     @IBAction func signInBtnTapped(_ sender: Any) {
         
-        guard let email = signInEmailTxtField.text, !email.isEmpty,
-              let password = signInPasswordTxtField.text, !password.isEmpty else {
-            // Handle empty fields
-            authenticateUser { [weak self] success in
-                    guard let self = self else { return }
-                    if success {
-                        self.navigateToDetailViewController()
-                    } else {
-                        self.showAuthenticationFailedAlert()
-                    }
-                }
-            return
-        }
+        let login: LoginRequest = LoginRequest(email: signInEmailTxtField.text ?? "N/A", password: signInPasswordTxtField.text ?? "N/A")
         
-      //  presenter.login(username: email, password: password)
+        APIManager.PostLoginData(loginRequest: login)
+        
+        
     }
 }
 
-//extension SignInViewController: SignInPresenterDelegate {
-//    func didLoginSuccessfully() {
-//        DispatchQueue.main.async {
-//            if let storyboard = self.storyboard,
-//               let homeVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
-//                homeVC.modalPresentationStyle = .fullScreen
-//                self.present(homeVC, animated: true)
-//            } else {
-//                print("Storyboard or ViewController with identifier 'TabBarController' not found.")
-//            }
-//        }
-//    }
-//    
-//    func didLoginWithFailure(error: Error) {
-//        DispatchQueue.main.async {
-//            if let storyboard = self.storyboard,
-//               let errorVC = storyboard.instantiateViewController(withIdentifier: "ErrorVc") as? ErrorVc {
-//                self.present(errorVC, animated: true)
-//            } else {
-//                print("Storyboard or ViewController with identifier 'ErrorVc' not found.")
-//            }
-//        }
-//    }
-//}
 
 
 extension SignInViewController {
     
-    private func setupAuthenticationContext() {
-         context.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
-    }
-    
-    private func authenticateUser(completion: @escaping (Bool) -> Void) {
-        var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            let reason = "Login into app"
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, error in
-                DispatchQueue.main.async {
-                    completion(success)
-                }
-            }
-        } else {
-            print(error?.localizedDescription ?? "Nothing Found")
-            completion(false)
-        }
-    }
-    
+   
     
     private func navigateToDetailViewController() {
         let homeVC = storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController

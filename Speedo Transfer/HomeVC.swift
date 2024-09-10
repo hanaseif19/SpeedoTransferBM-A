@@ -8,6 +8,8 @@ import UIKit
 
 class HomeVC: UIViewController {
 
+    @IBOutlet weak var InitialsLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     var recentTransactions : [Transaction] = []
     var hiddenFlag:Bool = true
     
@@ -28,34 +30,34 @@ class HomeVC: UIViewController {
         homeTableView.dataSource = self
         homeTableView.allowsSelection = false
         homeTableView.isScrollEnabled = false
+        nameLabel.text=CurrentUser.shared.name 
+        let name = CurrentUser.shared.name ?? "N A"
+
+        let initials = name.split(separator: " ")
+            .compactMap { $0.first }
+            .map { String($0) }
+            .joined()
+
+        InitialsLabel.text = initials.uppercased()
+      
     }
     
     private func fetchAccountBalance() {
         // Use the token from the Session singleton
-        let token = Session.shared.authToken
+        let token = Session.shared.authToken ?? "N/A"
         
         if token.isEmpty {
             print("Token is empty")
             self.balanceLabel.text = "1000 EG"
             return
         }
+        else
+        {   self.balanceLabel.text = "\(CurrentUser.shared.accounts[0].balance ?? 1200) EG"
+        }
+            
        
         
-//        print("Token: \(token)")
-//
-//        AccountService.shared.fetchAccountBalance(with: token) { result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let balance):
-//                    self.balanceLabel.text = "\(balance) EG"
-//                case .failure(let error):
-//                    print("Error fetching balance: \(error)")
-//                    self.showALert(title: "Error", message: "Failed to fetch account balance.")
-//                    let errorVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorVc") as! ErrorVc
-//                    self.present(errorVC, animated: true)
-//                }
-//            }
-//        }
+
     }
     
     func setUpRecentTransactions() {

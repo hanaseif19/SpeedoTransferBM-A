@@ -853,9 +853,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="Wxd-cz-vyj"/>
                     <connections>
+                        <outlet property="InitialsLabel" destination="Ib8-0L-Ocf" id="thb-Ph-3ij"/>
                         <outlet property="balanceLabel" destination="8vM-tv-1cW" id="WS9-4T-KCL"/>
                         <outlet property="hiddenBalanceButton" destination="Si1-lQ-hF8" id="nMt-o8-CnY"/>
                         <outlet property="homeTableView" destination="VA2-cR-R1j" id="uiN-eL-y0l"/>
+                        <outlet property="nameLabel" destination="oV6-Bk-Kit" id="fO3-BF-k8X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pDP-KR-qMt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1701,6 +1703,10 @@
                             <constraint firstItem="LTq-FS-wWl" firstAttribute="trailing" secondItem="blE-Kh-CkR" secondAttribute="trailing" constant="34" id="zcZ-Bc-cDR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="InitialsLabel" destination="ZEy-7x-718" id="Vpo-Zr-ydn"/>
+                        <outlet property="NameLabel" destination="aRe-wt-nj7" id="vbr-xd-6xp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mal-yK-EkX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1915,6 +1921,13 @@
                             <constraint firstItem="AZS-rS-iwg" firstAttribute="leading" secondItem="jC9-XA-QMe" secondAttribute="leading" id="zac-pP-LC0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="BankAccountLabel" destination="p7T-AG-mhJ" id="XEa-lv-4U7"/>
+                        <outlet property="CountryLabel" destination="Eci-cu-sVC" id="hr2-nd-cww"/>
+                        <outlet property="DOBLabel" destination="KiU-wc-GTT" id="yfM-g8-hQ3"/>
+                        <outlet property="EmailLabel" destination="mpo-mh-8pr" id="47U-2j-NL6"/>
+                        <outlet property="NameLabel" destination="G8F-td-xoh" id="bqQ-bB-4sg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DqH-Bo-Ud1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

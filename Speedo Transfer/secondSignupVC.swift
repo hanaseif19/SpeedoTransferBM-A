@@ -82,7 +82,8 @@ class secondSignupVC: UIViewController, CountrySelectionDelegate {
             country: country,
             birthDate: birthDate
         )
-        APIManager.PostRegisterationData(user: myUser)
+        
+        APIManager.PostRegistrationData(user: myUser)
         
 
        //
@@ -92,7 +93,6 @@ class secondSignupVC: UIViewController, CountrySelectionDelegate {
         let SignIn = self.storyboard?.instantiateViewController(withIdentifier: "SignInVC") as! SignInViewController
         self.navigationController?.pushViewController(SignIn, animated: true)
     }
-    
     
     
     

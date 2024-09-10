@@ -4,5 +4,5 @@ class Session {
     static let shared = Session()
     private init() {}
     
-    var authToken: String = "" // Provide a default value
+    var authToken: String? 
 }

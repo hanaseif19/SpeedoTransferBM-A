@@ -7,11 +7,23 @@ import UIKit
 
 class PersonalInfoVC: UIViewController {
 
+    @IBOutlet weak var NameLabel: UILabel!
+   
+    @IBOutlet weak var DOBLabel: UILabel!
+    @IBOutlet weak var EmailLabel: UILabel!
+    @IBOutlet weak var CountryLabel: UILabel!
+    @IBOutlet weak var BankAccountLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.style = .editor
         title = "Profile Information"
+//        NameLabel.text = CurrentUser.shared.name
+//        EmailLabel.text=CurrentUser.shared.email
+//        CountryLabel.text = CurrentUser.shared
+//        DOBLabel.text = CurrentUser.shared.birthDate
+//        BankAccountLabel.text=CurrentUser.shared.accounts[0].accountNumber
     }
     
 

@@ -7,10 +7,21 @@ import UIKit
 
 class ProfileVC: UIViewController {
 
+    @IBOutlet weak var InitialsLabel: UILabel!
+    @IBOutlet weak var NameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.style = .editor
         title = "Profile"
+        NameLabel.text=CurrentUser.shared.name
+        let name = CurrentUser.shared.name ?? "N A"
+
+        let initials = name.split(separator: " ")
+            .compactMap { $0.first }
+            .map { String($0) }
+            .joined()
+
+        InitialsLabel.text = initials.uppercased()
     }
     
     

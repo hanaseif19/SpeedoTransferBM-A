@@ -64,9 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func switchToProfile()
     {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let homeVC = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-         homeVC.modalPresentationStyle = .fullScreen
-        let navVC = UINavigationController(rootViewController: homeVC)
+        let TabBarController = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+        TabBarController.modalPresentationStyle = .fullScreen
+        let navVC = UINavigationController(rootViewController: TabBarController)
         window?.rootViewController = navVC
         
        
