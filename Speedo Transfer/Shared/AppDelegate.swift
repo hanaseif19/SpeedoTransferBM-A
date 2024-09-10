@@ -9,29 +9,35 @@ import IQKeyboardManagerSwift
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
-
+  var window: UIWindow?
+  // var window: InactivityWindow?
+    var inactivityTimer: Timer?
+      let timeoutInterval: TimeInterval = 120 // 120 seconds
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         IQKeyboardManager.shared.enable = true // makes us navigate between text boxes 
- 
-    
-               if let isLoggedIn = UserDefaults.standard.object(forKey: "isLoggedIn") as? Bool {
-                        if (isLoggedIn)
-                        {
-                            switchToProfile()
-                        }
-                        else
-                        {
-                            switchToLogin()
-                        }
-                    }
-                    else
-                    {
-                        switchToReg()
-                    }
-                   
-            
+     //   self.window = InactivityWindow(frame: UIScreen.main.bounds)
+
+       // self.window = InactivityWindow(frame: UIScreen.main.bounds)
+
+//               if let isLoggedIn = UserDefaults.standard.object(forKey: "isLoggedIn") as? Bool {
+//                        if (isLoggedIn)
+//                        {
+//                            switchToProfile()
+//                        }
+//                        else
+//                        {
+//                            switchToLogin()
+//                        }
+//                    }
+//                    else
+//                    {
+//                        switchToReg()
+//                    }
+                       self.window?.makeKeyAndVisible()
+
+       // startInactivityTimer()
+
         return true
 
         }
@@ -45,7 +51,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       
      //        self.navigationController?.pushViewController(SignIn, animated: true)
     }
-   
+    func applicationDidTimout(notification: NSNotification) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let SignIn = sb.instantiateViewController(withIdentifier: "SignInVC") as! SignInViewController
+        let navVC = UINavigationController(rootViewController: SignIn)
+        window?.rootViewController = navVC
+       }
     func switchToReg()
     {
       // go to splash screen 

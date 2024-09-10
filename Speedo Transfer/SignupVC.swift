@@ -14,7 +14,6 @@ class SignupVC: UIViewController {
     @IBOutlet weak var ConfirmPasswordTxtField: CustomTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setUpUI()
         setupNavBar()
     }

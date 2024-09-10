@@ -6,6 +6,7 @@ target 'Speedo Transfer' do
   use_frameworks!
 
   # Pods for Speedo Transfer
+pod 'Alamofire'
 pod 'FittedSheets'
 pod 'IQKeyboardManagerSwift', '7.0.0'
 pod 'OTPFieldView'

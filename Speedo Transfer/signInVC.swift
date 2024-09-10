@@ -12,7 +12,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var signInEmailTxtField: CustomTextField!
     @IBOutlet weak var signInPasswordTxtField: CustomTextField!
     
-    private var presenter = SignInPresenter(apiClient: URLSessionApiClient())
+//    private var presenter = SignInPresenter(apiClient: URLSessionApiClient())
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class SignInViewController: UIViewController {
         title = "Sign In"
             UserDefaults.standard.setValue(false, forKey: "isLoggedIn")
 
-        presenter.delegate = self
+   //     presenter.delegate = self
     }
     
     private func configureTextFields() {
@@ -53,34 +53,34 @@ class SignInViewController: UIViewController {
             return
         }
         
-        presenter.login(username: email, password: password)
+      //  presenter.login(username: email, password: password)
     }
 }
 
-extension SignInViewController: SignInPresenterDelegate {
-    func didLoginSuccessfully() {
-        DispatchQueue.main.async {
-            if let storyboard = self.storyboard,
-               let homeVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
-                homeVC.modalPresentationStyle = .fullScreen
-                self.present(homeVC, animated: true)
-            } else {
-                print("Storyboard or ViewController with identifier 'TabBarController' not found.")
-            }
-        }
-    }
-    
-    func didLoginWithFailure(error: Error) {
-        DispatchQueue.main.async {
-            if let storyboard = self.storyboard,
-               let errorVC = storyboard.instantiateViewController(withIdentifier: "ErrorVc") as? ErrorVc {
-                self.present(errorVC, animated: true)
-            } else {
-                print("Storyboard or ViewController with identifier 'ErrorVc' not found.")
-            }
-        }
-    }
-}
+//extension SignInViewController: SignInPresenterDelegate {
+//    func didLoginSuccessfully() {
+//        DispatchQueue.main.async {
+//            if let storyboard = self.storyboard,
+//               let homeVC = storyboard.instantiateViewController(withIdentifier: "TabBarController") as? TabBarController {
+//                homeVC.modalPresentationStyle = .fullScreen
+//                self.present(homeVC, animated: true)
+//            } else {
+//                print("Storyboard or ViewController with identifier 'TabBarController' not found.")
+//            }
+//        }
+//    }
+//    
+//    func didLoginWithFailure(error: Error) {
+//        DispatchQueue.main.async {
+//            if let storyboard = self.storyboard,
+//               let errorVC = storyboard.instantiateViewController(withIdentifier: "ErrorVc") as? ErrorVc {
+//                self.present(errorVC, animated: true)
+//            } else {
+//                print("Storyboard or ViewController with identifier 'ErrorVc' not found.")
+//            }
+//        }
+//    }
+//}
 
 
 extension SignInViewController {

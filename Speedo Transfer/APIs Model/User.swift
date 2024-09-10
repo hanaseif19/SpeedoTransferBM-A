@@ -6,23 +6,34 @@
 import Foundation
 
 struct UserRegistrationRequest: Codable {
-//    var firstName: String
-//    var lastName: String
+    
     var name: String
     var email: String
     var password: String
-//    var userName: String
-//    var country: String
-//    var dateOfBirth: String
-
-    enum CodingKeys: String, CodingKey {
-//        case firstName
-//        case lastName
-        case name
-        case email
-        case password
-//        case userName
-//        case country
-//        case dateOfBirth
-    }
+    var confirmPassword: String
+    var country: String
+    var birthDate: String
+    
 }
+
+    struct PostRegisterBaseResponse: Decodable {
+        var timestamp: String?
+        var message: String?
+        var details :String?
+        var httpStatus: String?
+        var createdAt: String?
+        var updatedAt:String?
+      
+    }
+
+//    struct statusDetails: Decodable {
+//        var is5xxServerError: String?
+//        var is4xxClientError: String?
+//        var is2xxSuccessful : String?
+//        var is1xxInformational : String?
+//        var is3xxRedirection : String?
+//        
+//        
+//        
+//    
+//}

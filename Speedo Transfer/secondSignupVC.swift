@@ -36,6 +36,29 @@ class secondSignupVC: UIViewController, CountrySelectionDelegate {
         
     }
     
+    private func convertCountry(fullName: String) -> String? {
+        let countryAbbreviations: [String: String] = [
+            "United States": "US",
+            "United Kingdom": "UK",
+            "Egypt": "EG",
+        ]
+        
+        return countryAbbreviations[fullName]
+    }
+    private func convertDate(dateString: String) -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "dd/MM/yyyy" // Input format: "08/09/2024"
+        
+        if let date = inputDateFormatter.date(from: dateString) {
+            let outputDateFormatter = DateFormatter()
+            outputDateFormatter.dateFormat = "yyyy-MM-dd" 
+            //"2024-09-08"
+            
+            return outputDateFormatter.string(from: date)
+        } else {
+            return nil
+        }
+    }
     @IBAction func continueBtnTapped(_ sender: Any) {
         
         guard let tempUser = tempUser else {
@@ -47,31 +70,22 @@ class secondSignupVC: UIViewController, CountrySelectionDelegate {
         let email = tempUser.email
         let password = tempUser.password
 
+        let country = convertCountry(fullName: signCountryTxtField.text ?? "Egypt") ?? "EG"
 
-        let user = UserRegistrationRequest(
+        let birthDate = convertDate(dateString: signDateTxtField.text ?? "08/09/2024") ?? "2024-09-08"
+
+        let myUser: UserRegistrationRequest = UserRegistrationRequest(
             name: fullname,
             email: email,
-            password: password
-
+            password: password,
+            confirmPassword: password,
+            country: country,
+            birthDate: birthDate
         )
+        APIManager.PostRegisterationData(user: myUser)
         
-        print("User object to be sent: \(user)")
-        
-        AuthService.registerUser(with: user) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let response):
-                    print("API Response: \(response)")
-                    
-                    self.goToLoginScreen()
 
-                case .failure(let error):
-                    print("API Error: \(error.localizedDescription)")
-                    
-                    self.goToLoginScreen()
-                }
-            }
-        }
+       //
     }
     
     private func goToLoginScreen() {

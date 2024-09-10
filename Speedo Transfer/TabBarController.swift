@@ -11,7 +11,6 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         UserDefaults.standard.setValue(true, forKey: "isLoggedIn")
 
-        // Do any additional setup after loading the view.
     }
 
 }

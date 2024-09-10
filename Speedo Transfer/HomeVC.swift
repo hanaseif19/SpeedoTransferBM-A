@@ -41,21 +41,21 @@ class HomeVC: UIViewController {
         }
        
         
-        print("Token: \(token)")
-
-        AccountService.shared.fetchAccountBalance(with: token) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let balance):
-                    self.balanceLabel.text = "\(balance) EG"
-                case .failure(let error):
-                    print("Error fetching balance: \(error)")
-                    self.showALert(title: "Error", message: "Failed to fetch account balance.")
-                    let errorVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorVc") as! ErrorVc
-                    self.present(errorVC, animated: true)
-                }
-            }
-        }
+//        print("Token: \(token)")
+//
+//        AccountService.shared.fetchAccountBalance(with: token) { result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let balance):
+//                    self.balanceLabel.text = "\(balance) EG"
+//                case .failure(let error):
+//                    print("Error fetching balance: \(error)")
+//                    self.showALert(title: "Error", message: "Failed to fetch account balance.")
+//                    let errorVC = self.storyboard?.instantiateViewController(withIdentifier: "ErrorVc") as! ErrorVc
+//                    self.present(errorVC, animated: true)
+//                }
+//            }
+//        }
     }
     
     func setUpRecentTransactions() {
