@@ -36,6 +36,11 @@ class FavouriteListCell: UITableViewCell {
         
         
     }
+    func configureCell(name: String , account: String )
+    {
+        self.accountNumLabel.text="Account "+account
+        self.nameLabel.text=name
+    }
 }
     
 

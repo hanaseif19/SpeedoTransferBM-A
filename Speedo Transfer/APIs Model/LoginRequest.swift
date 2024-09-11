@@ -45,3 +45,6 @@ struct FavoriteData: Codable
     let accountNumber: String?
     let recipientName: String?
 }
+//struct AllFavorites: Codable {
+//    let arr: [FavoriteData]
+//}

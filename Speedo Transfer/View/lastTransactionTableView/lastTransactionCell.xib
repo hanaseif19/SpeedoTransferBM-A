@@ -139,9 +139,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="oN0-E9-9r0"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <connections>
-                <outlet property="Sender" destination="1fw-6a-AXK" id="mGJ-id-LgM"/>
-            </connections>
             <point key="canvasLocation" x="129.00763358778624" y="6.6901408450704229"/>
         </tableViewCell>
     </objects>

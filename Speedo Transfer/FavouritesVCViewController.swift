@@ -6,9 +6,11 @@
 
 import UIKit
 import FittedSheets
+import Alamofire
 
 class FavouritesVCViewController: UIViewController {
-
+    var arr: [FavoriteData] = []
+  
     @IBOutlet weak var favouriteTableView: UITableView!
     let favCell: String = "FavouriteListCell"
     
@@ -18,7 +20,46 @@ class FavouritesVCViewController: UIViewController {
         favouriteTableView.dataSource = self
         favouriteTableView.delegate = self
         favouriteTableView.register(UINib(nibName: "FavouriteListCell", bundle: nil), forCellReuseIdentifier: favCell)
+        bindTableDate()
     }
+    func bindTableDate() {
+        let token = Session.shared.authToken
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token ?? "ABC")"
+        ]
+
+        AF.request("https://banquemisr-transfer-service.onrender.com/api/favourites",
+                   method: .get,
+                   encoding: JSONEncoding.default,
+                   headers: headers)
+            .response { response in
+                
+                if let error = response.error {
+                    print("Request error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let data = response.data else {
+                    print("No data received")
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode([FavoriteData].self, from: data)
+                    
+                    // Update the array and reload the table view on the main thread
+                    DispatchQueue.main.async {
+                        self.arr = decodedResponse
+                        self.favouriteTableView.reloadData()
+                    }
+                    
+                } catch let error {
+                    print("Decoding error: \(error.localizedDescription)")
+                }
+            }
+    }
+
 
     func centerNavigationBarTitle() {
         let titleLabel = UILabel()
@@ -33,12 +74,14 @@ class FavouritesVCViewController: UIViewController {
 
 extension FavouritesVCViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.arr.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: favCell , for: indexPath) as! FavouriteListCell
         cell.delegate = self
+        let favorite = arr[indexPath.row]
+        cell.configureCell(name: favorite.recipientName ?? "No Name", account: favorite.accountNumber ?? "No Account")
         return cell
     }
     
