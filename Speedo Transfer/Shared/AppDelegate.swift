@@ -61,16 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
       // go to splash screen 
     }
-    func switchToProfile()
-    {
+    func switchToProfile() {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let TabBarController = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-        TabBarController.modalPresentationStyle = .fullScreen
-        let navVC = UINavigationController(rootViewController: TabBarController)
-        window?.rootViewController = navVC
+        let tabBarController = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+        tabBarController.modalPresentationStyle = .fullScreen
         
-       
-       
+        if let window = UIApplication.shared.delegate?.window {
+            window?.rootViewController = tabBarController
+            window?.makeKeyAndVisible()
+        }
     }
     
     
