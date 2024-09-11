@@ -22,7 +22,18 @@ class EditProfileVC: UIViewController, CountrySelectionDelegate {
         self.navigationItem.style = .editor
         title = "Edit Profile"
         setUpUI()
+        let pullToRefreshGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePullToRefresh))
+               view.addGestureRecognizer(pullToRefreshGesture)
     }
+    @objc func handlePullToRefresh(_ gesture: UIPanGestureRecognizer) {
+           if gesture.state == .ended {
+               updateView()
+           }
+       }
+
+       func updateView() {
+setUpUI()
+       }
     private func isValidData() -> Bool {
         guard let name = fullNameTxtField.text?.trimmed, !name.isEmpty else {
             showALert(title: "Sorry", message: "Please enter your name!")
@@ -46,8 +57,12 @@ class EditProfileVC: UIViewController, CountrySelectionDelegate {
     private func setUpUI(){
         fullNameTxtField.setType(.name)
         fullNameTxtField.placeholder = "Enter your full name"
+        fullNameTxtField.text = CurrentUser.shared.name
+        
         EmailTxtField.setType(.email)
         EmailTxtField.placeholder = "Enter your email"
+        EmailTxtField.text = CurrentUser.shared.email
+        
         Country.setType(.country)
         Country.placeholder = "Select your country"
         
@@ -55,6 +70,7 @@ class EditProfileVC: UIViewController, CountrySelectionDelegate {
         
         DOBTxtField.setType(.dateOfBirth)
         DOBTxtField.placeholder = "DD/MM/YYYY"
+        DOBTxtField.text = CurrentUser.shared.birthDate
         
     }
     @objc func showCountryPicker() {
@@ -78,7 +94,10 @@ class EditProfileVC: UIViewController, CountrySelectionDelegate {
     @IBAction func SaveButtonTapped(_ sender: Any) {
        
             if isValidData() {
-               
+                let UpdatedData = updateModel(name: fullNameTxtField.text, email:EmailTxtField.text,phoneNumber: "01101506430" )
+                APIManager.updateData(updateRequest: UpdatedData)
+                
+//                APIManager.fetchUserDataByEmail(email: Curren, redirect: false)
                 self.showALert(title: "Success", message: "Changed Successfully!")
     //            self.navigationController?.popViewController(animated: true)
             

@@ -40,4 +40,8 @@ struct TransferBaseResponse: Codable {
     let status: Bool?
     let timestamp: String?
     }
-
+struct FavoriteData: Codable
+{
+    let accountNumber: String?
+    let recipientName: String?
+}

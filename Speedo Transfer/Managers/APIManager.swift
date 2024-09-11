@@ -33,7 +33,7 @@ class APIManager {
                 if decodedResponse.message == "Login Successful" {
                     Session.shared.authToken = decodedResponse.token ?? "ABC"
                     fetchUserDataByEmail(email: loginRequest.email, redirect: true)
-                    
+                    print("Yesss u logged in")
                     // switchToHomeScreen() // Uncomment if needed
                 } else {
                     print("Login failed: \(decodedResponse.message ?? "Failed Login")")
@@ -46,7 +46,7 @@ class APIManager {
         }
     }
     
-    private static func fetchUserDataByEmail(email: String, redirect: Bool) {
+    public static func fetchUserDataByEmail(email: String, redirect: Bool) {
        //  var apiClient  = URLSessionApiClient()
         guard let token = Session.shared.authToken else {
             print("No auth token available")
@@ -144,6 +144,63 @@ class APIManager {
             }
         }
     }
+    static func updateData (updateRequest: updateModel)
+     {
+         guard let token = Session.shared.authToken else {
+             print("No auth token available")
+             return
+         }
+         
+
+         let headers: HTTPHeaders = [
+             "Authorization": "Bearer \(token)"
+         ]
+         
+//         "name":"sama Ahmed" ,
+//       "email": "sama@gmail.com",
+//       "phoneNumber": "01101506430"
+        let param: [String: Any] = [
+            "name": updateRequest.name!,
+            "email": updateRequest.email!,
+            "phoneNumber": updateRequest.phoneNumber!
+        ]
+         print("name",updateRequest.name!)
+         print(  "email", updateRequest.email!)
+         print("phoneNumber", updateRequest.phoneNumber!)
+        print("https://banquemisr-transfer-service.onrender.com/api/customer/update?email=\(CurrentUser.shared.email!)")
+         AF.request("https://banquemisr-transfer-service.onrender.com/api/customer/update?email=\(CurrentUser.shared.email!)",
+                   method: .put,
+                   parameters: param,
+                   encoding: JSONEncoding.default,
+     headers:headers)
+        .response { response in
+            
+            if let error = response.error {
+                print("Request error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = response.data else {
+                print("No data received")
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+            
+                let decodedResponse = try decoder.decode(updateResponse.self, from: data)
+                print(decodedResponse.email ?? "hi")
+                print("name", decodedResponse.name!)
+                print("email", decodedResponse.email!)
+                
+                CurrentUser.shared.name=decodedResponse.name
+                CurrentUser.shared.email=decodedResponse.email
+           
+                
+            } catch let error {
+                print("Decoding error: \(error.localizedDescription)")
+            }
+        }
+    }
     
     private static func switchToSignInScreen() {
         DispatchQueue.main.async {
@@ -161,47 +218,7 @@ class APIManager {
         }
     }
     
-//    static func GetTransactionHistory() {
-//        let token=Session.shared.authToken
-//        
-//        let param: [String: Any] = [
-//            "page": 0,
-//            "size": 10
-//        ]
-//        let headers: HTTPHeaders = [
-//            "Authorization": "Bearer \(token ??  "ABC")"
-//        ]
-//        AF.request("https://banquemisr-transfer-service.onrender.com/api/transactions/history",
-//                   method: .get,
-//                   parameters: param,
-//                   encoding: JSONEncoding.default,
-//                   headers:headers)
-//        .response { response in
-//            
-//            if let error = response.error {
-//                print("Request error: \(error.localizedDescription)")
-//                return
-//            }
-//            
-//            guard let data = response.data else {
-//                print("No data received")
-//                return
-//            }
-//            
-//            do {
-//                let decoder = JSONDecoder()
-//                let decodedResponse = try decoder.decode(TransactionHistoryResponse.self, from: data)
-//                let array=decodedResponse.transactions
-//                for t in array
-//                {
-//                    print(t.amount)
-//                }
-//                
-//            } catch let error {
-//                print("Decoding error: \(error.localizedDescription)")
-//            }
-//        }
-//    }
+  
    
     static func PostTransferData(transfer: Transfer) {
         let param: [String: Any] = [
@@ -235,6 +252,46 @@ class APIManager {
                 let decodedResponse = try decoder.decode(TransferBaseResponse.self, from: data)
                 print(" I transferred " , decodedResponse.amount)
                 APIManager.fetchUserDataByEmail(email: CurrentUser.shared.email!, redirect: false)
+                
+            } catch let error {
+                print("Decoding error: \(error.localizedDescription)")
+                print("HI")
+            }
+        }
+    }
+    static func addToFavorites( favorite: FavoriteData)
+    {
+        let param: [String: Any] = [
+            "accountNumber": favorite.accountNumber!,
+            "recipientName": favorite.recipientName!,
+          
+        ]
+        let token = Session.shared.authToken
+        let headers: HTTPHeaders = [
+                  "Authorization": "Bearer \(token ??  "ABC")"
+              ]
+        AF.request("https://banquemisr-transfer-service.onrender.com/api/favourites",
+                   method: .post,
+                   parameters: param,
+                   encoding: JSONEncoding.default, headers: headers )
+        .response { response in
+            
+            if let error = response.error {
+                print("Request error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = response.data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode(FavoriteData.self, from: data)
+//                print(" I transferred " , decodedResponse.amount)
+//                APIManager.fetchUserDataByEmail(email: CurrentUser.shared.email!, redirect: false)
+                print("i added", decodedResponse.recipientName!)
                 
             } catch let error {
                 print("Decoding error: \(error.localizedDescription)")

@@ -7,9 +7,9 @@
 import UIKit
 
 class transferAmount3VC: UIViewController {
+    @IBOutlet weak var SenderAcc: UILabel!
     @IBOutlet weak var Amount: UILabel!
     @IBOutlet weak var RAccount: UILabel!
-    @IBOutlet weak var Senderacc: UILabel!
     @IBOutlet weak var RName: UILabel!
     @IBOutlet weak var SenderName: UILabel!
     var user : TemptransferUser?
@@ -23,8 +23,9 @@ class transferAmount3VC: UIViewController {
           
         }
         RAccount.text=user?.accountNumber
+        print(user?.name, "in third VC")
         RName.text=user?.name
-        Senderacc.text = CurrentUser.shared.accounts[0].accountNumber
+        SenderAcc.text = CurrentUser.shared.accounts[0].accountNumber
         SenderName.text=CurrentUser.shared.name
         
     }
@@ -35,7 +36,10 @@ class transferAmount3VC: UIViewController {
     
     
     @IBAction func addFavouriteBtnTapped(_ sender: Any) {
-        
+        let favorite = FavoriteData(accountNumber: RAccount.text, recipientName:   RName.text)
+        print("recipient" , RName.text! , " account Number", RAccount.text! )
+        APIManager.addToFavorites(favorite: favorite)
+        self.showALert(title: "Success", message:"Added to favorites")
     }
     
     

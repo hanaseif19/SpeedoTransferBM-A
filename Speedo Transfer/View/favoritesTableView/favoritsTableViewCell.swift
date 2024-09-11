@@ -32,5 +32,10 @@ class favoritsTableViewCell: UITableViewCell {
         
         
     }
+    func configureCell(name: String , account: String )
+    {
+        self.favAccLabel.text="Account "+account
+        self.favLabelName.text=name
+    }
     
 }

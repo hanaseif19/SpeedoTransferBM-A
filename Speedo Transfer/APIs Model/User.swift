@@ -26,14 +26,29 @@ struct UserRegistrationRequest: Codable {
       
     }
 
-//    struct statusDetails: Decodable {
-//        var is5xxServerError: String?
-//        var is4xxClientError: String?
-//        var is2xxSuccessful : String?
-//        var is1xxInformational : String?
-//        var is3xxRedirection : String?
-//        
-//        
-//        
-//    
+//    struct statusDetails: Codable {
+//var error: Bool?
+//        var is5xxServerError: Bool?
+//        var is4xxClientError: Bool?
+//        var is2xxSuccessful : Bool?
+//        var is1xxInformational : Bool?
+//        var is3xxRedirection : Bool?
 //}
+
+//}
+
+struct updateResponse : Codable {
+
+        var updatedAt: String?
+        var massage: String?
+        var details : String?
+        var httpStatusCode: String?
+        var name: String?
+        var email: String?
+        var phoneNumber: String?
+}
+struct updateModel: Codable {
+var name: String?
+    var email: String?
+    var phoneNumber: String?
+}

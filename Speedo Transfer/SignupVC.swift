@@ -36,10 +36,10 @@ class SignupVC: UIViewController {
         self.navigationController?.pushViewController(SignUp2, animated: true)
     }
     
-//    @IBAction func signInBtnTapped(_ sender: Any) {
-//        let SignIn = self.storyboard?.instantiateViewController(withIdentifier: "SignInVC") as! SignInViewController
-//        self.navigationController?.pushViewController(SignIn, animated: true)
-//    }
+    @IBAction func signInBtnTapped(_ sender: Any) {
+        let SignIn = self.storyboard?.instantiateViewController(withIdentifier: "SignInVC") as! SignInViewController
+        self.navigationController?.pushViewController(SignIn, animated: true)
+    }
     
     private func isValidData() -> Bool {
         guard let name = signNameTxtField.text?.trimmed, !name.isEmpty else {

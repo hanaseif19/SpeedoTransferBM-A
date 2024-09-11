@@ -21,10 +21,17 @@ struct Transaction {
     var amount: String?
     var date: String? 
 }
-//struct TransactionHistoryResponse : Codable {
-//    var transactions: [Transaction]
-//}
-
+struct TransactionHistoryResponse : Codable {
+    var transactions: [TransactionHana]
+}
+struct TransactionHana: Codable {
+    var transactionId: Int
+    var fromAccount: String
+    var toAccount: String
+    var amount: Int
+    var status: Bool
+    var timestamp: String
+}
 
 //{
 //"transactions": [

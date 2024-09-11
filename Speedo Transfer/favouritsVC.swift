@@ -6,7 +6,6 @@
 import UIKit
 
 class favouritsVC: UIViewController {
-
     @IBOutlet weak var favoritsTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()

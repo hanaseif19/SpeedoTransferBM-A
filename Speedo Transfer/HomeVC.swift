@@ -39,9 +39,19 @@ class HomeVC: UIViewController {
             .joined()
 
         InitialsLabel.text = initials.uppercased()
+        let pullToRefreshGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePullToRefresh))
+               view.addGestureRecognizer(pullToRefreshGesture)
       
     }
-    
+    @objc func handlePullToRefresh(_ gesture: UIPanGestureRecognizer) {
+           if gesture.state == .ended {
+               updateView()
+           }
+       }
+
+       func updateView() {
+           fetchAccountBalance()
+       }
     private func fetchAccountBalance() {
         // Use the token from the Session singleton
         let token = Session.shared.authToken ?? "N/A"
@@ -53,6 +63,13 @@ class HomeVC: UIViewController {
         }
         else
         {   self.balanceLabel.text = "\(CurrentUser.shared.accounts[0].balance ?? 1200) EG"
+            self.nameLabel.text = CurrentUser.shared.name
+            let initials =  self.nameLabel.text!.split(separator: " ")
+                .compactMap { $0.first }
+                .map { String($0) }
+                .joined()
+
+            self.InitialsLabel.text = initials.uppercased()
         }
             
        

@@ -22,8 +22,26 @@ class ProfileVC: UIViewController {
             .joined()
 
         InitialsLabel.text = initials.uppercased()
+        let pullToRefreshGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePullToRefresh))
+               view.addGestureRecognizer(pullToRefreshGesture)
     }
-    
+    @objc func handlePullToRefresh(_ gesture: UIPanGestureRecognizer) {
+           if gesture.state == .ended {
+               updateView()
+           }
+       }
+
+       func updateView() {
+           NameLabel.text=CurrentUser.shared.name
+           let name = CurrentUser.shared.name ?? "N A"
+
+           let initials = name.split(separator: " ")
+               .compactMap { $0.first }
+               .map { String($0) }
+               .joined()
+
+           InitialsLabel.text = initials.uppercased()
+       }
     
     @IBAction func personalinfoBtnTapped(_ sender: Any) {
         let personalInfo = self.storyboard?.instantiateViewController(withIdentifier: "PersonalInfoVC") as! PersonalInfoVC

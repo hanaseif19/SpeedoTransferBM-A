@@ -24,8 +24,22 @@ class PersonalInfoVC: UIViewController {
         CountryLabel.text = "United States"
         DOBLabel.text = CurrentUser.shared.birthDate
         BankAccountLabel.text=CurrentUser.shared.accounts[0].accountNumber
+        let pullToRefreshGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePullToRefresh))
+               view.addGestureRecognizer(pullToRefreshGesture)
     }
-    
+    @objc func handlePullToRefresh(_ gesture: UIPanGestureRecognizer) {
+           if gesture.state == .ended {
+               updateView()
+           }
+       }
+
+       func updateView() {
+           NameLabel.text = CurrentUser.shared.name
+           EmailLabel.text=CurrentUser.shared.email
+           CountryLabel.text = "United States"
+           DOBLabel.text = CurrentUser.shared.birthDate
+           BankAccountLabel.text=CurrentUser.shared.accounts[0].accountNumber
+       }
 
     /*
     // MARK: - Navigation
