@@ -20,7 +20,7 @@ class SignInViewController: UIViewController {
         configureTextFields()
         self.navigationItem.hidesBackButton = true
         title = "Sign In"
-        UserDefaults.standard.setValue(false, forKey: "isLoggedIn")
+        UserDefaults.standard.setValue(true, forKey: "PreviousAccess")
         
     }
     

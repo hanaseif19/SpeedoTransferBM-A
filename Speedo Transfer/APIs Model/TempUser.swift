@@ -12,3 +12,8 @@ struct TempUser {
     var email: String
     var password: String
 }
+struct TemptransferUser {
+    var name: String
+    var accountNumber: String
+    var amount: Int 
+}

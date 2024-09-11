@@ -42,6 +42,8 @@
 		333EDF692C8F944B007D2757 /* TransactionDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333EDF682C8F944B007D2757 /* TransactionDetailsVC.swift */; };
 		333EDF6B2C909C1D007D2757 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333EDF6A2C909C1D007D2757 /* Activity.swift */; };
 		333EDF722C90CC4E007D2757 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333EDF712C90CC4E007D2757 /* APIManager.swift */; };
+		335260F52C91C33C00F32A1B /* NetworkAPIClient .swift in Sources */ = {isa = PBXBuildFile; fileRef = 335260F32C91C33C00F32A1B /* NetworkAPIClient .swift */; };
+		335260F62C91C33C00F32A1B /* NetworkClientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335260F42C91C33C00F32A1B /* NetworkClientHelper.swift */; };
 		33EAD4AC2C90FE2C00DB82A4 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD4AB2C90FE2C00DB82A4 /* CurrentUser.swift */; };
 		6B1831072C61AD8E000C1F95 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B1831062C61AD8E000C1F95 /* TabBarController.swift */; };
 		6B18310B2C61C940000C1F95 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B18310A2C61C940000C1F95 /* LoginRequest.swift */; };
@@ -105,6 +107,8 @@
 		333EDF682C8F944B007D2757 /* TransactionDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsVC.swift; sourceTree = "<group>"; };
 		333EDF6A2C909C1D007D2757 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		333EDF712C90CC4E007D2757 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		335260F32C91C33C00F32A1B /* NetworkAPIClient .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkAPIClient .swift"; sourceTree = "<group>"; };
+		335260F42C91C33C00F32A1B /* NetworkClientHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkClientHelper.swift; sourceTree = "<group>"; };
 		33EAD4AB2C90FE2C00DB82A4 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		4ED090023D8BBBD2216C871A /* Pods-Speedo Transfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Speedo Transfer.debug.xcconfig"; path = "Target Support Files/Pods-Speedo Transfer/Pods-Speedo Transfer.debug.xcconfig"; sourceTree = "<group>"; };
 		6B1831062C61AD8E000C1F95 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		184F256D2C590F0A00E0061A /* Speedo Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				335260F22C91C30700F32A1B /* NetworkLayer */,
 				333EDF702C90CC3A007D2757 /* Managers */,
 				184F257C2C590F0B00E0061A /* Info.plist */,
 				184F25852C59129B00E0061A /* Shared */,
@@ -339,6 +344,15 @@
 				333EDF712C90CC4E007D2757 /* APIManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		335260F22C91C30700F32A1B /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				335260F32C91C33C00F32A1B /* NetworkAPIClient .swift */,
+				335260F42C91C33C00F32A1B /* NetworkClientHelper.swift */,
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 		3AB5A64E3D46988263699FC9 /* Frameworks */ = {
@@ -587,8 +601,10 @@
 				6B1831072C61AD8E000C1F95 /* TabBarController.swift in Sources */,
 				184F258F2C592BB600E0061A /* UIViewController+Alert.swift in Sources */,
 				6BB6CB732C60525E001CA89E /* transferAmount3VC.swift in Sources */,
+				335260F52C91C33C00F32A1B /* NetworkAPIClient .swift in Sources */,
 				33EAD4AC2C90FE2C00DB82A4 /* CurrentUser.swift in Sources */,
 				18ECFC962C6188A2001CB329 /* signInVC.swift in Sources */,
+				335260F62C91C33C00F32A1B /* NetworkClientHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

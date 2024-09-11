@@ -18,3 +18,26 @@ struct LoginResponse: Codable {
 //        "tokenType": "Bearer",
 //        "status": "ACCEPTED"
 }
+//{
+//"amount": 0,
+//"sendCurrency": "EGY",
+//"receiverAccNumber": "string",
+//"senderAccNumber": "string"
+//}
+struct Transfer : Codable  {
+    let amount: Int?
+    let sendCurrency: String?
+    let receiverAccNumber : String?
+    let senderAccNumber : String?
+    
+}
+struct TransferBaseResponse: Codable {
+   
+   let transactionId: Int?
+    let fromAccount: String?
+    let toAccount: String?
+    let amount: Int?
+    let status: Bool?
+    let timestamp: String?
+    }
+

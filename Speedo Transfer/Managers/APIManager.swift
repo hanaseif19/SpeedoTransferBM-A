@@ -2,7 +2,7 @@ import Foundation
 import Alamofire
 
 class APIManager {
-    
+   
     static func PostLoginData(loginRequest: LoginRequest) {
         let param: [String: Any] = [
             "email": loginRequest.email,
@@ -32,7 +32,7 @@ class APIManager {
                 
                 if decodedResponse.message == "Login Successful" {
                     Session.shared.authToken = decodedResponse.token ?? "ABC"
-                    fetchUserDataByEmail(email: loginRequest.email)
+                    fetchUserDataByEmail(email: loginRequest.email, redirect: true)
                     
                     // switchToHomeScreen() // Uncomment if needed
                 } else {
@@ -46,7 +46,8 @@ class APIManager {
         }
     }
     
-    private static func fetchUserDataByEmail(email: String) {
+    private static func fetchUserDataByEmail(email: String, redirect: Bool) {
+       //  var apiClient  = URLSessionApiClient()
         guard let token = Session.shared.authToken else {
             print("No auth token available")
             return
@@ -57,7 +58,18 @@ class APIManager {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(token)"
         ]
+//        let url = URL(string: urlString)!
+//        let apiRequest = APIRequest(url: url, method: .GET, headers: headers , queryParams: nil , body: nil )
         
+//        apiClient.dataTask(apiRequest) { (_ result: Result<CurrentUserResponse, Error>) in
+//            switch result {
+//                       case .failure(let error):
+//                           print(error)
+//                       case .success(let data):
+//                           print("Data: \(data)")
+//                       }
+//        }
+//        
         AF.request(urlString,
                    method: .get,
                    headers: headers)
@@ -77,9 +89,12 @@ class APIManager {
                 let decoder = JSONDecoder()
                 let userResponse = try decoder.decode(CurrentUserResponse.self, from: data)
                 CurrentUser.shared.update(from: userResponse)
-                switchToHomeScreen()
+                if (redirect)
+                {
+                    switchToHomeScreen()
+                }
                 print("User data after logging in: \(userResponse.email)")
-                
+                print( userResponse.accounts![0].accountNumber )
             } catch let error {
                 print("Decoding error: \(error.localizedDescription)")
                 print("Hello")
@@ -142,6 +157,88 @@ class APIManager {
         DispatchQueue.main.async {
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                 appDelegate.switchToProfile()
+            }
+        }
+    }
+    
+//    static func GetTransactionHistory() {
+//        let token=Session.shared.authToken
+//        
+//        let param: [String: Any] = [
+//            "page": 0,
+//            "size": 10
+//        ]
+//        let headers: HTTPHeaders = [
+//            "Authorization": "Bearer \(token ??  "ABC")"
+//        ]
+//        AF.request("https://banquemisr-transfer-service.onrender.com/api/transactions/history",
+//                   method: .get,
+//                   parameters: param,
+//                   encoding: JSONEncoding.default,
+//                   headers:headers)
+//        .response { response in
+//            
+//            if let error = response.error {
+//                print("Request error: \(error.localizedDescription)")
+//                return
+//            }
+//            
+//            guard let data = response.data else {
+//                print("No data received")
+//                return
+//            }
+//            
+//            do {
+//                let decoder = JSONDecoder()
+//                let decodedResponse = try decoder.decode(TransactionHistoryResponse.self, from: data)
+//                let array=decodedResponse.transactions
+//                for t in array
+//                {
+//                    print(t.amount)
+//                }
+//                
+//            } catch let error {
+//                print("Decoding error: \(error.localizedDescription)")
+//            }
+//        }
+//    }
+   
+    static func PostTransferData(transfer: Transfer) {
+        let param: [String: Any] = [
+            "amount": transfer.amount,
+            "sendCurrency": "EGY",
+            "receiverAccNumber": transfer.receiverAccNumber ,
+            "senderAccNumber" : CurrentUser.shared.accounts[0].accountNumber
+        ]
+        let token = Session.shared.authToken
+        let headers: HTTPHeaders = [
+                  "Authorization": "Bearer \(token ??  "ABC")"
+              ]
+        AF.request("https://banquemisr-transfer-service.onrender.com/api/transfer/account",
+                   method: .post,
+                   parameters: param,
+                   encoding: JSONEncoding.default, headers: headers )
+        .response { response in
+            
+            if let error = response.error {
+                print("Request error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = response.data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode(TransferBaseResponse.self, from: data)
+                print(" I transferred " , decodedResponse.amount)
+                APIManager.fetchUserDataByEmail(email: CurrentUser.shared.email!, redirect: false)
+                
+            } catch let error {
+                print("Decoding error: \(error.localizedDescription)")
+                print("HI")
             }
         }
     }

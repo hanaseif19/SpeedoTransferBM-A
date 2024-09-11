@@ -19,11 +19,11 @@ class PersonalInfoVC: UIViewController {
 
         self.navigationItem.style = .editor
         title = "Profile Information"
-//        NameLabel.text = CurrentUser.shared.name
-//        EmailLabel.text=CurrentUser.shared.email
-//        CountryLabel.text = CurrentUser.shared
-//        DOBLabel.text = CurrentUser.shared.birthDate
-//        BankAccountLabel.text=CurrentUser.shared.accounts[0].accountNumber
+        NameLabel.text = CurrentUser.shared.name
+        EmailLabel.text=CurrentUser.shared.email
+        CountryLabel.text = "United States"
+        DOBLabel.text = CurrentUser.shared.birthDate
+        BankAccountLabel.text=CurrentUser.shared.accounts[0].accountNumber
     }
     
 

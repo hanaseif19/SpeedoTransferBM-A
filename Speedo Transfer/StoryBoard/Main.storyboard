@@ -2916,7 +2916,7 @@
                                 <color key="textColor" name="LabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9J-8w-a8p">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EGP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9J-8w-a8p">
                                 <rect key="frame" x="192.66666666666666" y="170.33333333333334" width="40.333333333333343" height="59.666666666666657"/>
                                 <fontDescription key="fontDescription" name="SinhalaSangamMN-Bold" family="Sinhala Sangam MN" pointSize="20"/>
                                 <color key="textColor" name="LabelColor"/>
@@ -3145,6 +3145,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Transfer" style="editor" id="Ty6-hf-Hnw"/>
                     <connections>
+                        <outlet property="amountLabel" destination="Jg0-Mx-r0z" id="RkE-yR-FIt"/>
+                        <outlet property="amountpt2" destination="kKF-he-gsZ" id="zXk-Mg-iVo"/>
+                        <outlet property="receiverAcc" destination="swF-f9-Pod" id="ToR-X3-bEw"/>
+                        <outlet property="receiverName" destination="iUc-Ab-gHe" id="bcV-gv-HjK"/>
+                        <outlet property="senderAcc" destination="Dav-69-Tnc" id="0iB-EF-MSv"/>
+                        <outlet property="senderName" destination="UDy-gm-4mv" id="dsg-en-Dgd"/>
                         <outlet property="viewFrom" destination="WpW-2f-UHZ" id="X3u-gf-Qns"/>
                         <outlet property="viewTo" destination="3db-qZ-U1U" id="nvJ-zj-lba"/>
                     </connections>
@@ -3426,6 +3432,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="gYk-5X-KzV"/>
                     <size key="freeformSize" width="393" height="852"/>
+                    <connections>
+                        <outlet property="Amount" destination="78u-3n-LYA" id="VVN-Ox-mdi"/>
+                        <outlet property="RAccount" destination="NRp-3f-EGn" id="1Ot-Sw-TGc"/>
+                        <outlet property="RName" destination="Sa8-Fm-Dq2" id="L0Q-iZ-ksS"/>
+                        <outlet property="SenderName" destination="F4C-R1-kl6" id="f30-gQ-PEN"/>
+                        <outlet property="Senderacc" destination="Sa8-Fm-Dq2" id="Odj-TX-XeP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LSj-tN-gSr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3478,8 +3491,64 @@
                                                 <color key="textColor" name="LabelColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oF6-ux-5PH">
-                                                <rect key="frame" x="8" y="79" width="377" height="135"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recipient Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bq-Oo-fxw">
+                                                <rect key="frame" x="8" y="238" width="189" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" name="labelColor2"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gma-7O-Q9F">
+                                                <rect key="frame" x="267" y="230.66666666666669" width="118" height="35"/>
+                                                <color key="tintColor" name="ButtonColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Favourite ►">
+                                                    <imageReference key="image" image="star" catalog="system" symbolScale="medium"/>
+                                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="favoriteBtnTapped:" destination="80b-Ee-tsS" eventType="touchUpInside" id="t8Z-hr-YXD"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIo-xk-qkO">
+                                                <rect key="frame" x="8" y="273" width="115" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" name="labelColor2"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Recipient Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fga-Rd-zWh" customClass="CustomTextField" customModule="Speedo_Transfer" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="300.66666666666663" width="377" height="49"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Percipient Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mdI-Sm-H7N" customClass="CustomTextField" customModule="Speedo_Transfer" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="384.66666666666663" width="377" height="49"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ru-Oz-EfX">
+                                                <rect key="frame" x="8" y="357" width="132" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" name="labelColor2"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djQ-gg-P5a">
+                                                <rect key="frame" x="8" y="463.66666666666663" width="377" height="50.666666666666629"/>
+                                                <color key="backgroundColor" name="ButtonColor"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Continue"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="continueTransferBtnTapped:" destination="80b-Ee-tsS" eventType="touchUpInside" id="dxq-hB-ffW"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oF6-ux-5PH">
+                                                <rect key="frame" x="8" y="95" width="377" height="135"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otd-Nf-arb">
                                                         <rect key="frame" x="25.000000000000004" y="16" width="63.333333333333343" height="16.666666666666671"/>
@@ -3521,62 +3590,6 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Recipient Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bq-Oo-fxw">
-                                                <rect key="frame" x="8" y="238" width="189" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                <color key="textColor" name="labelColor2"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gma-7O-Q9F">
-                                                <rect key="frame" x="267" y="230.66666666666669" width="118" height="35"/>
-                                                <color key="tintColor" name="ButtonColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Favourite ►">
-                                                    <imageReference key="image" image="star" catalog="system" symbolScale="medium"/>
-                                                    <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
-                                                </buttonConfiguration>
-                                                <connections>
-                                                    <action selector="favoriteBtnTapped:" destination="80b-Ee-tsS" eventType="touchUpInside" id="t8Z-hr-YXD"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIo-xk-qkO">
-                                                <rect key="frame" x="8" y="273" width="115" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" name="labelColor2"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Recipient Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fga-Rd-zWh" customClass="CustomTextField" customModule="Speedo_Transfer" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="300.66666666666663" width="377" height="49"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Percipient Account Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mdI-Sm-H7N" customClass="CustomTextField" customModule="Speedo_Transfer" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="384.66666666666663" width="377" height="49"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ru-Oz-EfX">
-                                                <rect key="frame" x="8" y="357" width="115" height="20"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" name="labelColor2"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djQ-gg-P5a">
-                                                <rect key="frame" x="8" y="463.66666666666663" width="377" height="50.666666666666629"/>
-                                                <color key="backgroundColor" name="ButtonColor"/>
-                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Continue"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="continueTransferBtnTapped:" destination="80b-Ee-tsS" eventType="touchUpInside" id="dxq-hB-ffW"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
@@ -3643,6 +3656,11 @@
                     <navigationItem key="navigationItem" id="eiR-B1-opF">
                         <barButtonItem key="backBarButtonItem" title=" " id="dcB-pP-Sm5"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="accLabel" destination="mdI-Sm-H7N" id="2cy-3Z-Zeg"/>
+                        <outlet property="amountLabel" destination="yPQ-Kb-11f" id="2aM-9P-fvJ"/>
+                        <outlet property="nameLabel" destination="fga-Rd-zWh" id="3al-sm-SeM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0NT-Zt-A0q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
