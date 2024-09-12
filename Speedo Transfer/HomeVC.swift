@@ -12,10 +12,11 @@ class HomeVC: UIViewController {
   
     @IBOutlet weak var InitialsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    var recentTransactions : [Transaction] = []
+    var history: [TransactionHana] = []
+   // var recentTransactions : [Transaction] = []
     var hiddenFlag:Bool = true
     
-    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var homeTableView: UITableView!   
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var hiddenBalanceButton: UIButton!
     
@@ -30,6 +31,11 @@ class HomeVC: UIViewController {
         
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        
+      
+        
+        let nib = UINib(nibName: "HomeTransactionTableViewCell", bundle: nil)
+        homeTableView.register(nib, forCellReuseIdentifier: "HomeTransactionTableViewCell")
         homeTableView.allowsSelection = false
         homeTableView.isScrollEnabled = false
         nameLabel.text=CurrentUser.shared.name 
@@ -43,14 +49,58 @@ class HomeVC: UIViewController {
         InitialsLabel.text = initials.uppercased()
         let pullToRefreshGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePullToRefresh))
                view.addGestureRecognizer(pullToRefreshGesture)
+        self.GetTransactionHistory()
       
     }
+    
     @objc func handlePullToRefresh(_ gesture: UIPanGestureRecognizer) {
            if gesture.state == .ended {
                updateView()
            }
        }
+    func GetTransactionHistory()  {
+        guard let token = Session.shared.authToken else {
+            print("No auth token available")
+            return
+        }
 
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(token)"
+        ]
+        
+        AF.request("https://banquemisr-transfer-service.onrender.com/api/transactions/history",
+                   method: .get,
+                   encoding: JSONEncoding.default,
+                   headers: headers)
+        .response { response in
+            if let error = response.error {
+                print("Request error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let data = response.data else {
+                print("No data received")
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let decodedResponse = try decoder.decode(TransactionHistoryResponse.self, from: data)
+                let arr = decodedResponse.transactions
+                self.history.removeAll()
+                self.history.append(contentsOf: arr)
+                
+                print("Transactions fetched: \(self.history.count)")
+                
+                DispatchQueue.main.async {
+                    self.homeTableView.reloadData()
+                }
+
+            } catch let error {
+                print("Home Error Decoding error: \(error.localizedDescription)")
+            }
+        }
+    }
        func updateView() {
            fetchAccountBalance()
        }
@@ -111,8 +161,8 @@ class HomeVC: UIViewController {
                     let arr = decodedResponse.transactions
                     for t in arr {
                         
-                        let transaction1 = Transaction(recipientName: t.fromAccount, MasterCardId: t.toAccount, amount: String(t.amount), date: t.timestamp)
-                        self.recentTransactions.append(transaction1)
+                      
+                        self.history.append(t)
                         
                        
                     }
@@ -120,7 +170,7 @@ class HomeVC: UIViewController {
                    
 
                 } catch let error {
-                    print("Decoding error: \(error.localizedDescription)")
+                    print("HOME VC Decoding error: \(error.localizedDescription)")
                 }
             }
         }
@@ -192,11 +242,21 @@ class HomeVC: UIViewController {
 
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentTransactions.count
+        return self.history.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = homeTableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath)
+        let cell = homeTableView.dequeueReusableCell(withIdentifier: "HomeTransactionTableViewCell", for: indexPath) as! HomeTransactionTableViewCell
+        cell.selectionStyle = .none
+       
+           let transaction = history[indexPath.row]
+           let senderAcc = transaction.fromAccount
+           let receiverAcc = transaction.toAccount
+           let amount = transaction.amount
+           let date = transaction.timestamp
+           let amountString = String(amount)
+        
+        cell.configureCell(senderAcc: senderAcc, Racc: receiverAcc, datee: date, amount: amountString)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -40,7 +40,7 @@ class APIManager {
                 }
                 
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print("login Decoding error: \(error.localizedDescription)")
                 print("HI")
             }
         }
@@ -96,7 +96,7 @@ class APIManager {
                 print("User data after logging in: \(userResponse.email)")
                 print( userResponse.accounts![0].accountNumber )
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print(" user data Decoding error: \(error.localizedDescription)")
                 print("Hello")
             }
         }
@@ -140,7 +140,7 @@ class APIManager {
                 }
                 
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print(" register Decoding error: \(error.localizedDescription)")
             }
         }
     }
@@ -197,7 +197,7 @@ class APIManager {
            
                 
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print("update data Decoding error: \(error.localizedDescription)")
             }
         }
     }
@@ -254,7 +254,7 @@ class APIManager {
                 APIManager.fetchUserDataByEmail(email: CurrentUser.shared.email!, redirect: false)
                 
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print("transfer data Decoding error: \(error.localizedDescription)")
                 print("HI")
             }
         }
@@ -294,7 +294,7 @@ class APIManager {
                 print("i added", decodedResponse.recipientName!)
                 
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print(" favorites Decoding error: \(error.localizedDescription)")
                 print("HI")
             }
         }

@@ -61,7 +61,7 @@ class lastTransactionsVC: UIViewController {
                 }
 
             } catch let error {
-                print("Decoding error: \(error.localizedDescription)")
+                print(" last transactions Decoding error: \(error.localizedDescription)")
             }
         }
     }
