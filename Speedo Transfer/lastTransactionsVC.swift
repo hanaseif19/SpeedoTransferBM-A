@@ -5,6 +5,7 @@ class lastTransactionsVC: UIViewController {
 
     @IBOutlet weak var lastTransactionsTableView: UITableView!
     var history: [TransactionHana] = []
+    var t : TransactionDetails?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +86,8 @@ extension lastTransactionsVC: UITableViewDelegate, UITableViewDataSource {
         let amount = transaction.amount
         let date = transaction.timestamp
         let amountString = String(amount)
+        t = TransactionDetails(date: date, sName: "Sender", sAcc: senderAcc, RName: "Receiver", Racc: receiverAcc, amount: amountString)
+      
         
         cell.configureCell(SenderAccount: senderAcc, date: date, receiverAccount: receiverAcc, amount: amountString)
         
@@ -92,8 +95,9 @@ extension lastTransactionsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let t = TransactionDetails(date: date , )
+       
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TransactionDetailsVC") as! TransactionDetailsVC
+        vc.t=t
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

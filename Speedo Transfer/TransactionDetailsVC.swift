@@ -8,7 +8,7 @@
 import UIKit
 
 class TransactionDetailsVC: UIViewController {
-   // let TransactionMain: TransactionDetails?
+    var t: TransactionDetails?
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var amount2: UILabel!
     @IBOutlet weak var Racc: UILabel!
@@ -19,7 +19,15 @@ class TransactionDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.style = .editor
-        title = "Successful Transaction"       
+        title = "Successful Transaction" 
+        date.text=t?.date
+        SName.text=t?.sName
+        Sacc.text=t?.sAcc
+        Racc.text=t?.Racc
+        Rname.text=t?.RName
+        amount.text=t?.amount
+        amount2.text=amount.text
+        
     }
     
 
