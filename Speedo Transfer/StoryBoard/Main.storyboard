@@ -3973,6 +3973,15 @@
                             <constraint firstItem="f2u-B6-64t" firstAttribute="width" secondItem="gZP-Id-A3F" secondAttribute="width" id="va9-Xy-Lsa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="Racc" destination="ZVT-bu-FL9" id="3xR-p1-g3E"/>
+                        <outlet property="Rname" destination="7rH-9K-bF7" id="hmi-iI-ztk"/>
+                        <outlet property="SName" destination="MD4-Dc-eHy" id="Tkg-GO-Wqq"/>
+                        <outlet property="Sacc" destination="aRN-qD-EXP" id="B8p-VQ-ZXm"/>
+                        <outlet property="amount" destination="och-fL-mhQ" id="x2p-TK-PtG"/>
+                        <outlet property="amount2" destination="0V0-GG-EhB" id="3C4-gq-ri8"/>
+                        <outlet property="date" destination="aO4-gg-guE" id="vPz-3l-4rc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XwD-De-0hq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

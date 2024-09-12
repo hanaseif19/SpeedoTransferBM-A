@@ -52,3 +52,12 @@ var name: String?
     var email: String?
     var phoneNumber: String?
 }
+
+struct TransactionDetails {
+    var date: String?
+    var sName: String?
+    var sAcc : String?
+    var RName: String?
+    var Racc: String?
+    var amount: String?
+}

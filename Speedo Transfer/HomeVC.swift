@@ -5,9 +5,11 @@
 
 
 import UIKit
+import Alamofire
 
 class HomeVC: UIViewController {
 
+  
     @IBOutlet weak var InitialsLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     var recentTransactions : [Transaction] = []
@@ -78,9 +80,54 @@ class HomeVC: UIViewController {
     }
     
     func setUpRecentTransactions() {
-        let transaction1 = Transaction(recipientName: "khalid", MasterCardId: "1456", amount: "1500", date: "Today 12:00 - Recived")
-        recentTransactions.append(transaction1)
-    }
+       
+            guard let token = Session.shared.authToken else {
+                print("No auth token available")
+                return
+            }
+
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(token)"
+            ]
+            
+            AF.request("https://banquemisr-transfer-service.onrender.com/api/transactions/history",
+                       method: .get,
+                       encoding: JSONEncoding.default,
+                       headers: headers)
+            .response { response in
+                if let error = response.error {
+                    print("Request error: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let data = response.data else {
+                    print("No data received")
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedResponse = try decoder.decode(TransactionHistoryResponse.self, from: data)
+                    let arr = decodedResponse.transactions
+                    for t in arr {
+                        
+                        let transaction1 = Transaction(recipientName: t.fromAccount, MasterCardId: t.toAccount, amount: String(t.amount), date: t.timestamp)
+                        self.recentTransactions.append(transaction1)
+                        
+                       
+                    }
+                    
+                   
+
+                } catch let error {
+                    print("Decoding error: \(error.localizedDescription)")
+                }
+            }
+        }
+    
+
+      
+    
     
     @IBAction func hiddenBalanceBTN(_ sender: Any) {
 
@@ -145,7 +192,7 @@ class HomeVC: UIViewController {
 
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return recentTransactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

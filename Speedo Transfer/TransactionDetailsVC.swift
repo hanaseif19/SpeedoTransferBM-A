@@ -8,12 +8,18 @@
 import UIKit
 
 class TransactionDetailsVC: UIViewController {
-
+   // let TransactionMain: TransactionDetails?
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var amount2: UILabel!
+    @IBOutlet weak var Racc: UILabel!
+    @IBOutlet weak var Rname: UILabel!
+    @IBOutlet weak var Sacc: UILabel!
+    @IBOutlet weak var SName: UILabel!
+    @IBOutlet weak var amount: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.style = .editor
-        title = "Successful Transaction"
-        // Do any additional setup after loading the view.
+        title = "Successful Transaction"       
     }
     
 

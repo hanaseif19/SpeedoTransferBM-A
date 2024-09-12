@@ -9,8 +9,13 @@ import UIKit
 class lastTransactionCell: UITableViewCell {
 
    
-   
+    @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
+    
+    @IBOutlet weak var RLabel: UILabel!
+    @IBOutlet weak var Name: UILabel!
     
     // @IBOutlet weak var Money: UILabel!
 //    @IBOutlet weak var ReceiverAcc: UILabel!
@@ -27,12 +32,13 @@ class lastTransactionCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-//    func configureCell(SenderAccount: String, date: String,  receiverAccount: String, amount: String) {
-//        
-//        self.Sender.text=SenderAccount
-//        self.R.text=receiverAccount
-//       self.Amount.text=amount
-//        self.Date.text=date
-//        
-//    }
+    
+    func configureCell(SenderAccount: String, date: String,  receiverAccount: String, amount: String) {
+        
+        self.nameLabel.text="From " + SenderAccount
+        self.RLabel.text="To " + receiverAccount
+       self.moneyLabel.text="EGP " + amount
+        self.dateLabel.text=date
+        
+    }
 }
