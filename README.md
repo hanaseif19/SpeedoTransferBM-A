@@ -41,13 +41,11 @@ Speedo Transfer is a secure and user-friendly banking app that allows users to m
     ```
 
 3. **Install dependencies**:
-   - For iOS:
      ```bash
      pod install
      ```
   
 4. **Open the project**:
-   - For iOS:
      Open `SpeedoTransfer.xcworkspace` in Xcode.
 
 ## Usage
