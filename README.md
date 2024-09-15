@@ -68,11 +68,14 @@ Speedo Transfer is a secure and user-friendly banking app that allows users to m
 4. **View Balance and Transactions**: Keep track of your current balance and review detailed transaction history.  
    <p align="center">
    <img src="https://github.com/user-attachments/assets/92e69d1e-1bd1-457a-9bd6-ba804ea90dc8" alt="Transaction History Screenshot" width="350">
+       <img src="https://github.com/user-attachments/assets/c733a2de-7932-4d44-88eb-44b98e4eb335" alt="Favorites Screenshot" width="350">
    </p>
 
 5. **Favorites**: Add frequent contacts to your favorites for quicker transactions.  
    <p align="center">
-   <img src="https://github.com/user-attachments/assets/c733a2de-7932-4d44-88eb-44b98e4eb335" alt="Favorites Screenshot" width="350">
+ 
+     <img width="350" alt="Screenshot 2024-09-15 at 9 12 15 PM" src="https://github.com/user-attachments/assets/386da88e-69af-4023-ab44-bcedadce79de">
+
    </p>
 
 6. **Profile Update**: Edit and update your profile information at any time.  
@@ -86,6 +89,4 @@ Speedo Transfer is a secure and user-friendly banking app that allows users to m
 - **Networking**: Alamofire (iOS)
 - **Authentication**: JWT (JSON Web Tokens)
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
